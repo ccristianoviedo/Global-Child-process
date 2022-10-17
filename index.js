@@ -109,7 +109,7 @@ app.get("/calculo-nobloq", function (req, res) {
   child.send(num)
 
   child.on("message", (resultados) => {
-    res.send(`Los numeros son ${resultados}`);
+    res.send(resultados);
   });
   
   
