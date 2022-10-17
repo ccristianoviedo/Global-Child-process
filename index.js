@@ -102,7 +102,7 @@ app.get("/register", (req, res) => {
 
 app.get("/calculo-nobloq", function (req, res) {
 
-  const num = req.query.num
+  const num = req.query.num || 100000000
 
   const child = fork("./sumar.js");
   

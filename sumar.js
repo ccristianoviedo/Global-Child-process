@@ -8,6 +8,6 @@ process.on("message", (msg) => {
 
 const Aleatorios =(msg)=>{
   new Array()
-  let miarray = Array.from({length: msg || 100000000}, () => Math.floor(Math.random() * 1000));
+  let miarray = Array.from({length: msg }, () => Math.floor(Math.random() * 1000));
   return miarray
 } 
