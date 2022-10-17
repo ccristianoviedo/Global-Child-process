@@ -73,14 +73,6 @@ app.engine(
 app.set("view engine", "hbs"); 
 app.set("views", "./views"); 
 
-app.get("/calculo-nobloq", function (req, res) {
-  const child = fork("./sumar.js");
-  child.send("start");
-  child.on("message", (suma) => {
-    res.send(`La suma es ${suma}`);
-  });
-});
-
 app.get("/", (req, res) => {
   if (req.session.nombre) {
     res.redirect("/main");
@@ -108,15 +100,20 @@ app.get("/register", (req, res) => {
   res.render("register");
 });
 
+app.get("/calculo-nobloq", function (req, res) {
 
-app.get("/re", (req, res) => {
   const num = req.query.num
-  new Array()
-  let miarray = Array.from({length: num || 10000000}, () => Math.floor(Math.random() * 1000));
-  res.send(miarray);
+
+  const child = fork("./sumar.js");
+  
+  child.send(num)
+
+  child.on("message", (resultados) => {
+    res.send(`Los numeros son ${resultados}`);
+  });
+  
+  
 });
-
-
 
 app.get("/info",auth, (req, res) => {
  
