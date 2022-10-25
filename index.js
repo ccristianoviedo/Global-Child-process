@@ -103,6 +103,7 @@ app.get("/register", (req, res) => {
   res.render("register");
 });
 
+<<<<<<< HEAD
 /*app.get("/calculo-nobloq", function (req, res) {
 
   const num = req.query.num
@@ -118,6 +119,23 @@ app.get("/register", (req, res) => {
   
 });*/
 
+=======
+app.get("/calculo-nobloq", function (req, res) {
+
+  const num = req.query.num || 100000000
+
+  const child = fork("./sumar.js");
+  
+  child.send(num)
+
+  child.on("message", (resultados) => {
+    res.send(resultados);
+  });
+  
+  
+});
+
+>>>>>>> 8034758f115d8700f356a2beb94b62c730e19a1a
 app.get("/info",auth, (req, res) => {
  
   res.send(`Argumentos de entrada: ${process.argv[0]},------------------
