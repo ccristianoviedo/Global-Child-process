@@ -15,13 +15,16 @@ import User from "./src/models/User.js";
 import dotenv from "dotenv";
 dotenv.config()
 import {fork} from "child_process"
+import router from "./routes/index.js"
 
 const PORT = process.env.PORT || 5000
-const MONGO = process.env.MONGO 
+const MONGO = process.env.MONGOENV
 
 app.use(cookieParser());
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
+
+app.use("/api", router)
 
 app.use(session({
   store: new mongoStore({
@@ -73,14 +76,6 @@ app.engine(
 app.set("view engine", "hbs"); 
 app.set("views", "./views"); 
 
-app.get("/calculo-nobloq", function (req, res) {
-  const child = fork("./sumar.js");
-  child.send("start");
-  child.on("message", (suma) => {
-    res.send(`La suma es ${suma}`);
-  });
-});
-
 app.get("/", (req, res) => {
   if (req.session.nombre) {
     res.redirect("/main");
@@ -108,15 +103,20 @@ app.get("/register", (req, res) => {
   res.render("register");
 });
 
+/*app.get("/calculo-nobloq", function (req, res) {
 
-app.get("/re", (req, res) => {
   const num = req.query.num
-  new Array()
-  let miarray = Array.from({length: num || 10000000}, () => Math.floor(Math.random() * 1000));
-  res.send(miarray);
-});
 
+  const child = fork("./sumar.js");
+  
+  child.send(num)
 
+  child.on("message", (message) => {
+    res.send(`Los numeros son ${message}`);
+  });
+  
+  
+});*/
 
 app.get("/info",auth, (req, res) => {
  

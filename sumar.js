@@ -1,15 +1,15 @@
-//sumar.js
-function sumar() {
-    let suma = 0;
-    for (let i = 0; i < 5e78; i++) {
-      suma += i;
-    }
-    return suma;
-  }
-  
-  process.on("message", (msg) => {
-    if (msg == "start") {
-      const sum = sumar();
-      process.send(sum);
-    }
-  });
+
+process.on("message", (msg) => {
+   
+  const resultados = Aleatorios(msg)
+
+  const duplicados = resultados.reduce((prev, cur) => ((prev[cur] = prev[cur] + 1 || 1), prev), {})
+
+  process.send(duplicados)
+})
+
+const Aleatorios =(msg)=>{
+  new Array()
+  let miarray = Array.from({length: msg }, () => Math.floor(Math.random() * 1000));
+  return miarray
+}
