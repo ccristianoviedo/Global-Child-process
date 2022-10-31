@@ -103,23 +103,6 @@ app.get("/register", (req, res) => {
   res.render("register");
 });
 
-<<<<<<< HEAD
-/*app.get("/calculo-nobloq", function (req, res) {
-
-  const num = req.query.num
-
-  const child = fork("./sumar.js");
-  
-  child.send(num)
-
-  child.on("message", (message) => {
-    res.send(`Los numeros son ${message}`);
-  });
-  
-  
-});*/
-
-=======
 app.get("/calculo-nobloq", function (req, res) {
 
   const num = req.query.num || 100000000
@@ -135,13 +118,13 @@ app.get("/calculo-nobloq", function (req, res) {
   
 });
 
->>>>>>> 8034758f115d8700f356a2beb94b62c730e19a1a
+
 app.get("/info",auth, (req, res) => {
  
   res.send(`Argumentos de entrada: ${process.argv[0]},------------------
             Sistema Operativo: ${process.platform},------------------
             Version Node: ${process.version},------------------
-            Uso memoria: ${process.memoryUsage()},------------------
+            Uso memoria: ${process.memoryUsage().rss},------------------
             Directorio: ${process.cwd()},------------------
             Id del proceso: ${process.pid},------------------          
            Titulo Porces: ${process.title},------------------          

@@ -1,4 +1,3 @@
-
 process.on("message", (msg) => {
    
   const resultados = Aleatorios(msg)

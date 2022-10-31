@@ -6,7 +6,6 @@ const randomRouter = Router();
 
 randomRouter.get("/", (req, res)=>{
    
-
     const num = req.query.num || 10
 
     const child = fork("./sumar.js");
@@ -16,10 +15,8 @@ randomRouter.get("/", (req, res)=>{
     child.on("message", (resultados) => {
       res.send(resultados);
     });
-        
-        
-      });
-
+                
+});
 
 export default randomRouter
 
